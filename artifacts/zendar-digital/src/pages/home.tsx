@@ -1,8 +1,9 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { ExternalLink, ArrowRight, Monitor, PenTool, LayoutTemplate, MapPin } from "lucide-react";
+import { ExternalLink, ArrowRight, Monitor, PenTool, LayoutTemplate, MapPin, CheckCircle } from "lucide-react";
 import logoIconPath from "@assets/zendar-digital-logo-icon.png";
 
 const fadeInUp = {
@@ -21,6 +22,38 @@ const staggerContainer = {
 };
 
 export default function Home() {
+  const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setSubmitting(true);
+    setFormError(null);
+    const form = e.currentTarget;
+    const data = {
+      name: (form.elements.namedItem("name") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
+    };
+    try {
+      const res = await fetch("https://formspree.io/f/xjgjbqeb", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (res.ok) {
+        setSubmitted(true);
+      } else {
+        setFormError("Something went wrong. Please try again or message us on WhatsApp.");
+      }
+    } catch {
+      setFormError("Unable to send. Please check your connection and try again.");
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background font-sans text-foreground selection:bg-primary selection:text-primary-foreground">
       {/* Header */}
@@ -221,39 +254,55 @@ export default function Home() {
                   viewport={{ once: true }}
                   variants={fadeInUp}
                 >
-                  <form action="https://formspree.io/f/xjgjbqeb" method="POST" className="space-y-6 bg-white/5 p-8 border border-white/10">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">Name</label>
-                      <Input 
-                        id="name" 
-                        name="name" 
-                        required 
-                        className="rounded-none bg-white/5 border-white/20 text-white h-12 focus-visible:ring-primary focus-visible:border-primary" 
-                      />
+                  {submitted ? (
+                    <div className="bg-white/5 p-8 border border-white/10 flex flex-col items-center justify-center text-center min-h-[340px]">
+                      <CheckCircle className="h-14 w-14 text-primary mb-5" />
+                      <h3 className="text-2xl font-bold text-white mb-3">Message received!</h3>
+                      <p className="text-gray-400 text-lg">We'll get back to you within 24 hours.</p>
                     </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-300">Email</label>
-                      <Input 
-                        id="email" 
-                        name="email" 
-                        type="email" 
-                        required 
-                        className="rounded-none bg-white/5 border-white/20 text-white h-12 focus-visible:ring-primary focus-visible:border-primary" 
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-300">Message</label>
-                      <Textarea 
-                        id="message" 
-                        name="message" 
-                        required 
-                        className="rounded-none bg-white/5 border-white/20 text-white min-h-[120px] focus-visible:ring-primary focus-visible:border-primary resize-none" 
-                      />
-                    </div>
-                    <Button type="submit" size="lg" className="w-full rounded-none h-14 font-bold text-lg bg-primary text-white hover:bg-primary/90">
-                      Send Message
-                    </Button>
-                  </form>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-6 bg-white/5 p-8 border border-white/10">
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">Name</label>
+                        <Input 
+                          id="name" 
+                          name="name" 
+                          required 
+                          className="rounded-none bg-white/5 border-white/20 text-white h-12 focus-visible:ring-primary focus-visible:border-primary" 
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-300">Email</label>
+                        <Input 
+                          id="email" 
+                          name="email" 
+                          type="email" 
+                          required 
+                          className="rounded-none bg-white/5 border-white/20 text-white h-12 focus-visible:ring-primary focus-visible:border-primary" 
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-300">Message</label>
+                        <Textarea 
+                          id="message" 
+                          name="message" 
+                          required 
+                          className="rounded-none bg-white/5 border-white/20 text-white min-h-[120px] focus-visible:ring-primary focus-visible:border-primary resize-none" 
+                        />
+                      </div>
+                      {formError && (
+                        <p className="text-red-400 text-sm">{formError}</p>
+                      )}
+                      <Button 
+                        type="submit" 
+                        size="lg" 
+                        disabled={submitting}
+                        className="w-full rounded-none h-14 font-bold text-lg bg-primary text-white hover:bg-primary/90 disabled:opacity-60"
+                      >
+                        {submitting ? "Sending…" : "Send Message"}
+                      </Button>
+                    </form>
+                  )}
                 </motion.div>
               </div>
             </div>
