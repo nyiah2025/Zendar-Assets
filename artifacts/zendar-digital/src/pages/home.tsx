@@ -221,7 +221,7 @@ export default function Home() {
                   viewport={{ once: true }}
                   variants={fadeInUp}
                 >
-                  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" className="space-y-6 bg-white/5 p-8 border border-white/10">
+                  <form action="https://formspree.io/f/xjgjbqeb" method="POST" className="space-y-6 bg-white/5 p-8 border border-white/10">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-300">Name</label>
                       <Input 
