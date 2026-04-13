@@ -290,9 +290,6 @@ export default function Home() {
                           className="rounded-none bg-white/5 border-white/20 text-white min-h-[120px] focus-visible:ring-primary focus-visible:border-primary resize-none" 
                         />
                       </div>
-                      {formError && (
-                        <p className="text-red-400 text-sm">{formError}</p>
-                      )}
                       <Button 
                         type="submit" 
                         size="lg" 
@@ -301,6 +298,9 @@ export default function Home() {
                       >
                         {submitting ? "Sending…" : "Send Message"}
                       </Button>
+                      {formError && (
+                        <p className="text-red-400 text-sm">{formError}</p>
+                      )}
                     </form>
                   )}
                 </motion.div>
