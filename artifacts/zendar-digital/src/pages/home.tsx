@@ -27,11 +27,22 @@ export default function Home() {
       <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="h-8 w-8 overflow-hidden flex-shrink-0">
+            {/*
+              The logo PNG is 1024×1024: Z icon box ~top 60%, text ~bottom 40%.
+              Container is clipped to 32×32px. Image is scaled to ~53px so the
+              Z icon region (≈615px) maps exactly to the 32px container height.
+              Negative left margin centers the icon horizontally in the container.
+            */}
+            <div
+              className="overflow-hidden flex-shrink-0"
+              style={{ width: "32px", height: "32px" }}
+              aria-label="Zendar Digital Z icon"
+            >
               <img
                 src={logoPath}
-                alt="Zendar Digital Z icon"
-                style={{ width: "53px", height: "53px", marginLeft: "-9px", marginTop: "0" }}
+                alt=""
+                aria-hidden="true"
+                style={{ width: "53px", height: "53px", marginLeft: "-10px" }}
               />
             </div>
             <span className="font-bold text-xl tracking-tight">Zendar Digital</span>
