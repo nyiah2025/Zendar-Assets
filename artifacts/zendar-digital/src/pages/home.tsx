@@ -42,8 +42,15 @@ export default function Home() {
 
       <main>
         {/* Hero Section */}
-        <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden border-b border-border">
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-muted via-background to-background -z-10" />
+        <section
+          className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden border-b border-border"
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)), url(${import.meta.env.BASE_URL}hero-bg.png)`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
+        >
           <div className="container mx-auto px-4 md:px-8">
             <motion.div 
               initial="hidden"
@@ -51,11 +58,11 @@ export default function Home() {
               variants={staggerContainer}
               className="max-w-4xl"
             >
-              <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.1] mb-6">
+              <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.1] mb-6 text-white">
                 Look the part.<br />
                 <span className="text-primary">Online.</span>
               </motion.h1>
-              <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-10 leading-relaxed font-medium">
+              <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-white/70 max-w-2xl mb-10 leading-relaxed font-medium">
                 We help small businesses show up professionally in the digital world. No agency fluff, just sharp execution.
               </motion.p>
               <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row gap-4">
@@ -65,7 +72,7 @@ export default function Home() {
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </a>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="rounded-none h-14 px-8 text-lg font-bold border-2">
+                <Button asChild size="lg" variant="outline" className="rounded-none h-14 px-8 text-lg font-bold border-2 border-white text-white hover:bg-white hover:text-black">
                   <a href="#services">See Services</a>
                 </Button>
               </motion.div>
