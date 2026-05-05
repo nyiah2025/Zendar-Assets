@@ -36,7 +36,7 @@ export default function About() {
                 <img
                   src={jayPhoto}
                   alt="Jay Gumbs"
-                  className="float-left mr-8 mb-4 w-[220px] md:w-[280px] lg:w-[320px] h-auto rounded-sm border-4 border-primary"
+                  className="block w-full max-w-[300px] mx-auto mb-8 md:float-left md:mx-0 md:mr-8 md:mb-4 md:w-[280px] lg:w-[320px] h-auto rounded-sm border-4 border-primary"
                 />
 
                 <div className="space-y-6">
