@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { ExternalLink, ArrowRight, Monitor, PenTool, LayoutTemplate, MapPin, CheckCircle } from "lucide-react";
 import logoIconPath from "@assets/zendar-digital-logo-icon.png";
+import jayPhoto from "@assets/jaygumbs_1778012127296.png";
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
@@ -66,6 +67,7 @@ export default function Home() {
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
             <a href="#services" className="hover:text-primary transition-colors">Services</a>
             <a href="#approach" className="hover:text-primary transition-colors">Our Approach</a>
+            <a href="#about" className="hover:text-primary transition-colors">About</a>
             <Button asChild variant="default" className="rounded-none font-semibold">
               <a href="#contact">Get Started</a>
             </Button>
@@ -204,6 +206,47 @@ export default function Home() {
                 </div>
               </motion.div>
             </div>
+          </div>
+        </section>
+
+        {/* About Section */}
+        <section id="about" className="py-24 md:py-32 bg-muted/30 border-b border-border">
+          <div className="container mx-auto px-4 md:px-8">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={fadeInUp}
+              className="mb-16"
+            >
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight">About</h2>
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={staggerContainer}
+              className="flex flex-col md:flex-row md:items-center gap-10 md:gap-12 max-w-5xl"
+            >
+              <motion.div variants={fadeInUp} className="flex-shrink-0 w-full max-w-[300px] mx-auto md:mx-0 md:w-[280px] lg:w-[320px]">
+                <img
+                  src={jayPhoto}
+                  alt="Jay Gumbs"
+                  className="w-full h-auto rounded-sm border-4 border-primary"
+                />
+              </motion.div>
+              <motion.div variants={fadeInUp} className="flex-1 space-y-6">
+                <p className="text-lg leading-relaxed text-foreground">
+                  I'm Jay, and I handle every project personally at Zendar Digital. When you work with me, you're working directly with the person doing the work — no handoffs to junior designers, no account managers in the middle, just straightforward collaboration from start to finish.
+                </p>
+                <p className="text-lg leading-relaxed text-foreground">
+                  I run Zendar Digital without the overhead of a traditional agency, which means you get professional work at honest prices. No project managers, no committees, no confusion. I've been building online since 2007, and I bring that experience to every website, logo, and digital asset I create.
+                </p>
+                <p className="text-lg leading-relaxed text-foreground">
+                  Small businesses deserve to look credible online without paying agency rates or dealing with agency bureaucracy. That's what Zendar Digital is here for — professional digital work, direct communication, and prices that make sense.
+                </p>
+              </motion.div>
+            </motion.div>
           </div>
         </section>
 
