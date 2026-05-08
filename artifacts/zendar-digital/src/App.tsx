@@ -6,6 +6,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import About from "@/pages/about";
 import AccentDentalDemo from "@/pages/accent-dental-demo";
+import TopSmilesDemo from "@/pages/top-smiles-demo";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/accent-dental-demo" component={AccentDentalDemo} />
+      <Route path="/top-smiles-demo" component={TopSmilesDemo} />
       <Route component={NotFound} />
     </Switch>
   );
